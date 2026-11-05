@@ -1,0 +1,19 @@
+TOGETHER - RENDER DEPLOYMENT
+
+1. Create a GitHub repository named together-couples-game.
+2. Upload all files and folders from this extracted project to the repository root.
+   Ensure app.py, requirements.txt, render.yaml, Procfile, templates/ and static/ are at the root.
+3. Sign in to Render and choose New > Blueprint (or New > Web Service).
+4. Connect the GitHub repository.
+5. If using Blueprint, Render reads render.yaml. If using Web Service manually:
+   Build command: pip install -r requirements.txt
+   Start command: gunicorn --worker-class gthread --workers 1 --threads 100 --bind 0.0.0.0:$PORT app:app
+6. Choose Free for a first test and create the service.
+7. Wait for the deploy to say Live, then open the onrender.com URL.
+8. Share that public URL with your partner. Both players must use the same URL and join the same room code.
+
+Notes:
+- Free Render services can sleep after inactivity and take time to wake.
+- The current room/game state is stored in server memory, so rooms reset when the server restarts/redeploys.
+- This package deploys the current build; it does not itself fix the separate fighter-animation issue.
+- Keep SECRET_KEY private; Render generates it from render.yaml.
