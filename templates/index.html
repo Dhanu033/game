@@ -1,79 +1,219 @@
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Together 💗 | Play Across Any Distance</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script>
 </head>
+
 <body>
-  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <div class="ambient ambient-one"></div>
+  <div class="ambient ambient-two"></div>
+
   <header class="topbar">
-    <a class="brand" href="#"><span class="brand-heart">♥</span> together<span class="brand-dot">.</span></a>
+    <a class="brand" href="#">
+      <span class="brand-heart">♥</span> together<span class="brand-dot">.</span>
+    </a>
     <span class="top-note">A little closer, no matter the distance</span>
   </header>
+
   <main class="shell">
+
     <section id="lobby" class="hero">
       <div class="eyebrow"><span>✦</span> MADE FOR TWO <span>✦</span></div>
+
       <h1>Love knows<br><em>no distance.</em></h1>
-      <p class="hero-copy">Make memories, laugh together, and turn miles into moments.</p>
+
+      <p class="hero-copy">
+        Make memories, laugh together, and turn miles into moments.
+      </p>
+
       <div class="join-card">
         <label for="playerName">YOUR NAME</label>
-        <input id="playerName" maxlength="24" placeholder="What should we call you?" autocomplete="nickname">
+
+        <input id="playerName" maxlength="24"
+          placeholder="What should we call you?"
+          autocomplete="nickname">
+
         <div class="join-actions">
-          <button class="primary" id="createBtn">Create a room <span>♥</span></button>
+          <button class="primary" id="createBtn">
+            Create a room <span>♥</span>
+          </button>
+
           <div class="or">or</div>
+
           <div class="join-line">
-            <input id="roomCodeInput" maxlength="6" placeholder="ROOM CODE" aria-label="Room code">
+            <input id="roomCodeInput" maxlength="6"
+              placeholder="ROOM CODE" aria-label="Room code">
             <button class="secondary" id="joinBtn">Join</button>
           </div>
         </div>
-        <p class="small-note">Just the two of you. Your room is private by code.</p>
+
+        <p class="small-note">
+          Just the two of you. Your room is private by code.
+        </p>
       </div>
-      <div class="floating-heart heart-a">♥</div><div class="floating-heart heart-b">♡</div>
+
+      <div class="floating-heart heart-a">♥</div>
+      <div class="floating-heart heart-b">♡</div>
     </section>
 
     <section id="room" class="hidden">
+
       <div class="room-header">
-        <div><div class="eyebrow">YOUR PRIVATE SPACE</div><h2>Our little world <span>♡</span></h2></div>
-        <div class="room-code-box"><span>ROOM CODE</span><strong id="roomCode">------</strong><button id="copyCode" title="Copy room code">Copy</button></div>
+        <div>
+          <div class="eyebrow">YOUR PRIVATE SPACE</div>
+          <h2>Our little world <span>♡</span></h2>
+        </div>
+
+        <div class="room-code-box">
+          <span>ROOM CODE</span>
+          <strong id="roomCode">------</strong>
+          <button id="copyCode" title="Copy room code">Copy</button>
+        </div>
       </div>
+
       <div class="partner-strip">
-        <div class="partner-avatar">♡</div><div><strong id="playerOne">You</strong><span>Connected</span></div>
+        <div class="partner-avatar">♡</div>
+        <div>
+          <strong id="playerOne">You</strong>
+          <span>Connected</span>
+        </div>
+
         <div class="distance-heart">♥</div>
-        <div class="partner-avatar second">♡</div><div><strong id="playerTwo">Waiting...</strong><span id="partnerStatus">Share your code to invite your person</span></div>
+
+        <div class="partner-avatar second">♡</div>
+        <div>
+          <strong id="playerTwo">Waiting...</strong>
+          <span id="partnerStatus">Share your code to invite your person</span>
+        </div>
       </div>
-      <div class="section-heading"><div><span class="eyebrow">PICK YOUR MOMENT</span><h2>What shall we play?</h2></div><span class="tiny-heart">♡</span></div>
+
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">PICK YOUR MOMENT</span>
+          <h2>What shall we play?</h2>
+        </div>
+        <span class="tiny-heart">♡</span>
+      </div>
+
       <div class="game-grid">
-        <button class="game-card" data-game="quiz"><span class="game-icon pink">♡</span><b>Love Quiz</b><small>How well do you know me?</small><span class="card-arrow">↗</span></button>
-        <button class="game-card" data-game="truth"><span class="game-icon peach">✦</span><b>Truth or Dare</b><small>Sweet questions & fun tasks</small><span class="card-arrow">↗</span></button>
-        <button class="game-card" data-game="rather"><span class="game-icon lilac">↔</span><b>Would You Rather</b><small>Choose your kind of love</small><span class="card-arrow">↗</span></button>
-        <button class="game-card" data-game="tictactoe"><span class="game-icon mint">⊞</span><b>Tic-Tac-Toe</b><small>A little friendly competition</small><span class="card-arrow">↗</span></button>
-        <button class="game-card countdown-card" data-game="countdown"><span class="game-icon rose">♡</span><b>Love Countdown</b><small>Count the days until we meet</small><span class="card-arrow">↗</span></button>
-        <button class="game-card fighter-card" data-game="fighter"><span class="game-icon pink">🥋</span><b>Couple Fighters</b><small>Playful martial-arts battle</small><span class="card-arrow">↗</span></button>
+
+        <button class="game-card" data-game="quiz">
+          <span class="game-icon pink">♡</span>
+          <b>Love Quiz</b>
+          <small>How well do you know me?</small>
+          <span class="card-arrow">↗</span>
+        </button>
+
+        <button class="game-card" data-game="truth">
+          <span class="game-icon peach">✦</span>
+          <b>Truth or Dare</b>
+          <small>Sweet questions & fun tasks</small>
+          <span class="card-arrow">↗</span>
+        </button>
+
+        <button class="game-card" data-game="rather">
+          <span class="game-icon lilac">↔</span>
+          <b>Would You Rather</b>
+          <small>Choose your kind of love</small>
+          <span class="card-arrow">↗</span>
+        </button>
+
+        <button class="game-card" data-game="tictactoe">
+          <span class="game-icon mint">⊞</span>
+          <b>Tic-Tac-Toe</b>
+          <small>A little friendly competition</small>
+          <span class="card-arrow">↗</span>
+        </button>
+
+        <button class="game-card countdown-card" data-game="countdown">
+          <span class="game-icon rose">♡</span>
+          <b>Love Countdown</b>
+          <small>Count the days until we meet</small>
+          <span class="card-arrow">↗</span>
+        </button>
+
+        <!-- NEW COUPLE FIGHT ARENA GAME -->
+        <a
+          class="game-card fighter-card"
+          href="https://fight-ox1c.onrender.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          style="text-decoration:none; color:inherit; cursor:pointer;"
+        >
+          <span class="game-icon pink">⚔️</span>
+          <b>Couple Fight Arena</b>
+          <small>Challenge your partner in a fun battle!</small>
+          <span class="card-arrow">↗</span>
+        </a>
+
       </div>
+
       <div class="lower-grid">
-        <section class="panel chat-panel"><div class="panel-title"><div><span class="eyebrow">JUST BETWEEN US</span><h3>Love notes <span>♡</span></h3></div><span class="online-dot">● LIVE</span></div>
-          <div id="chatMessages" class="chat-messages"><p class="empty-chat">Send the first little note 💌</p></div>
-          <form id="chatForm" class="chat-form"><input id="chatInput" maxlength="300" placeholder="Write something sweet..."><button aria-label="Send message">➤</button></form>
+
+        <section class="panel chat-panel">
+          <div class="panel-title">
+            <div>
+              <span class="eyebrow">JUST BETWEEN US</span>
+              <h3>Love notes <span>♡</span></h3>
+            </div>
+            <span class="online-dot">● LIVE</span>
+          </div>
+
+          <div id="chatMessages" class="chat-messages">
+            <p class="empty-chat">Send the first little note 💌</p>
+          </div>
+
+          <form id="chatForm" class="chat-form">
+            <input id="chatInput" maxlength="300"
+              placeholder="Write something sweet...">
+            <button aria-label="Send message">➤</button>
+          </form>
         </section>
-        <section class="panel score-panel"><span class="eyebrow">YOUR LITTLE WINS</span><h3>Shared scoreboard</h3><div id="scores"><p class="muted">Your scores will appear here.</p></div><p class="score-foot">The best score is having each other. ♡</p></section>
+
+        <section class="panel score-panel">
+          <span class="eyebrow">YOUR LITTLE WINS</span>
+          <h3>Shared scoreboard</h3>
+          <div id="scores">
+            <p class="muted">Your scores will appear here.</p>
+          </div>
+          <p class="score-foot">
+            The best score is having each other. ♡
+          </p>
+        </section>
+
       </div>
     </section>
 
     <section id="gameView" class="hidden game-view">
-      <button id="backBtn" class="back-button">← Back to our world</button>
+      <button id="backBtn" class="back-button">
+        ← Back to our world
+      </button>
+
       <div class="game-stage">
-        <div class="stage-sparkle">✦ &nbsp; JUST THE TWO OF US &nbsp; ✦</div>
+        <div class="stage-sparkle">
+          ✦ &nbsp; JUST THE TWO OF US &nbsp; ✦
+        </div>
         <div id="gameContent"></div>
       </div>
     </section>
+
     <div id="toast" class="toast" role="status"></div>
-    <footer>made with <span>♥</span> for the miles between you</footer>
+
+    <footer>
+      made with <span>♥</span> for the miles between you
+    </footer>
+
   </main>
+
   <script src="{{ url_for('static', filename='app.js') }}"></script>
 </body>
 </html>
